@@ -1,0 +1,62 @@
+import styled from 'styled-components';
+
+// Interfaces
+import { PreviewProps } from '../../interfaces';
+
+export const Container = styled.div`
+  width: 80%;
+  align-items: center;
+  margin: 20px auto;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: rgba(0.1, 0, 0, 0.2);
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    color: #444;
+
+    & + li {
+      margin-top: 5px;
+    }
+  }
+`;
+
+export const FileInfo = styled.div`
+  display: flex;
+  align-items: center;
+  margin: auto;
+
+  div {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 13px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: black;
+      margin-top: 10px;
+
+      button {
+        border: 0;
+        background: transparent;
+        color: #ff3c3c;
+        margin-left: 100px;
+        cursor: pointer;
+      }
+    }
+  }
+`;
+
+export const Preview = styled.div<PreviewProps>`
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+  background-image: url(${props => props.src});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-right: 10px;
+`;
