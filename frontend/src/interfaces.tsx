@@ -69,7 +69,7 @@ const FileProvider: React.FC = ({ children }) => {
       const data = new FormData();
 
       if (uploadedFile.file) {
-        data.append('file', uploadedFile.file, uploadedFile.name);
+        data.append('file', uploadedFile.file, uploadedFile.name, uploadedFile.preview);
       }
 
       api
