@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { FaFilePdf } from 'react-icons/fa';
+import {useFiles} from '../../../interfaces'
 import Exemplo1 from '../../../assets/3553.png';
 import Exemplo2 from '../../../assets/3872.png';
 import Exemplo3 from '../../../assets/032017.png';
@@ -15,17 +16,19 @@ import {
 } from './styles';
 
 export interface ISelectTopProps {
-  nameCietific: string;
+  nameCietific: string ;
   namePop: string;
   img: string;
   id: number;
 }
 
 const Modal: React.FC = () => {
+  const {responseFile} = useFiles();
+  console.log(responseFile);
   const exemploTop = [
     {
-      nameCietific: 'cresdoceu1',
-      namePop: 'avoro1',
+      nameCietific: responseFile[0]? responseFile[0].resuts[0].name: ' teste' ,
+      namePop:  responseFile[0]? responseFile[0].resuts[0].name: ' teste' ,
       img: Exemplo1,
       id: 1,
     },
@@ -99,74 +102,14 @@ const Modal: React.FC = () => {
             </div>
           </Info>
           <Grafic>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={90} />
-              <p>Madeira 1</p>
+            { !!responseFile[0] && responseFile[0].resuts.map((item)=>(
+              <div key={item.name}className="content">
+              <p>{item.percentage}</p>
+              <BarGrafic percentage={item.percentage} />
+              <p>{item.name}</p>
             </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={76} />
-              <p>Madeira 1</p>
-            </div>
-
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={50} />
-              <p>Madeira 1</p>
-            </div>
-
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={1} />
-              <p>Madeira 1</p>
-            </div>
-
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0.5} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
-            <div className="content">
-              <p>98.77%</p>
-              <BarGrafic percentage={0} />
-              <p>Madeira 1</p>
-            </div>
+            ))}
+            
           </Grafic>
         </ModalBox.Body>
         {/* <ModalBox.Footer>

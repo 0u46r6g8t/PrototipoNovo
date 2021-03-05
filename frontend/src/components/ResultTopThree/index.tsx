@@ -46,7 +46,6 @@ const ResultTopThree: React.FC = () => {
     setDataActive(files);
   }, [files]);
 
-  console.log(dataActive);
 
   return (
     <Container>
@@ -75,7 +74,7 @@ const ResultTopThree: React.FC = () => {
             <ButtonClick>
               <BsChevronRight className="itemDB" />
             </ButtonClick>
-            <Carroussel />
+            <Carroussel />y
           </Data>
         </ContentImage>
       </div>

@@ -29,7 +29,16 @@ export interface IDragDrop {
   error?: false;
   url: '';
 }
+interface IData{
+  name: string;
+  percentage: number;
+}
+export interface IResponse{
+  id: string;
+  resuts: [IData];
+}
 interface IDragContexData {
+  responseFile: IResponse[];
   uploadedFiles: IDragDrop[];
   deleteFile(id: string): void;
   fileUploaded(file: any): void;
@@ -47,6 +56,7 @@ const FileProvider: React.FC = ({ children }) => {
   const { addToast } = useToast();
 
   const [uploadedFiles, setUploadedFiles] = useState<IDragDrop[]>([]);
+  const [responseFile, setResponseFile] = useState<IResponse[]>([]);
 
   const uploadFiles = useCallback(item => {
     return 'Ola mundo';
@@ -83,13 +93,17 @@ const FileProvider: React.FC = ({ children }) => {
           },
         })
         .then(response => {
-          // console.log(response);
-          // updateFile(uploadedFile.id, {
-          //   nameuploaded: true,
-          //   id: response.data.id,
-          //   url: response.data.url,
-          // });
-          // console.log(response);
+          const outCome = Object.entries(response.data).map((item)=>({
+            name: item[0],
+            percentage: item[1],
+          }));
+
+          const result:IResponse = {
+            id: uniqueId(),
+            resuts: outCome,
+          };
+
+          setResponseFile(state => state.concat(result));
 
           addToast({
             type: 'sucesso',
@@ -135,7 +149,7 @@ const FileProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <FileContext.Provider value={{ uploadedFiles, fileUploaded, deleteFile }}>
+    <FileContext.Provider value={{ uploadedFiles, fileUploaded, deleteFile, responseFile }}>
       {children}
     </FileContext.Provider>
   );
