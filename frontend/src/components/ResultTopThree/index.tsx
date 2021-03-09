@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 // [+] Bibliotecas
 
@@ -8,7 +8,7 @@ import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 // Progress Bar
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Modal from './Modal';
-import { useFiles, IDragDrop } from '../../interfaces';
+import { useFiles, IDragDrop, IResponse } from '../../interfaces';
 
 import {
   Container,
@@ -39,14 +39,35 @@ const data = [
 ];
 
 const ResultTopThree: React.FC = () => {
-  const { uploadedFiles: files } = useFiles();
   const [dataActive, setDataActive] = useState<IDragDrop[]>([]);
+  const { responseFile } = useFiles();
 
-  useEffect(() => {
-    setDataActive(files);
-  }, [files]);
+  const responseData: IResponse[] = [];
+  
 
+  responseFile.map((itemFile, indexFile) => {
+    itemFile.resuts.map((item, index) => {
+      if( index < 3)
+        responseData.push({indexFile, item});
+    });
+  });
 
+  // Mudança do estado do button
+
+  const handleFile = useCallback((valueBool: Boolean) => {
+    if(valueBool){
+      setbuttonId(buttonId+1);
+      console.log(dataActive);
+      // setDataActive(uploadedFiles[button+1].preview);
+    }else{
+      setbuttonId(buttonId-1);
+      // setDataActive(uploadedFiles[button+1].preview);
+    }
+    
+  }, []);
+
+  const [buttonId, setbuttonId] = useState(0); 
+  
   return (
     <Container>
       <div className="containerData">
@@ -54,9 +75,9 @@ const ResultTopThree: React.FC = () => {
           <TextImage>
             <span>SUA FOTO</span>
           </TextImage>
-          <Data className="containerPhoto" url={data[0].url}>
+          <Data className="containerPhoto" url={dataActive}>
             <ButtonClick>
-              <BsChevronLeft className="itemPhoto" />
+              <BsChevronLeft className="itemPhoto" onClick={() => {setbuttonId(0)}}/>
             </ButtonClick>
             <DataImage className="dataImagePhoto" />
           </Data>
@@ -66,15 +87,16 @@ const ResultTopThree: React.FC = () => {
             <h1>{data[0].name}</h1>
           </TextImage>
         </ContentList>
+        
         <ContentImage>
           <TextImage>
             <span>BANCO DE DADOS</span>
           </TextImage>
           <Data className="containerDB" url={data[0].urlDB}>
             <ButtonClick>
-              <BsChevronRight className="itemDB" />
+              <BsChevronRight className="itemDB" onClick={() => {handleFile(true)}} />
             </ButtonClick>
-            <Carroussel />y
+            <Carroussel data={responseData} buttonId={buttonId} />
           </Data>
         </ContentImage>
       </div>

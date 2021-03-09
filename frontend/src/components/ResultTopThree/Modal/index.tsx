@@ -24,7 +24,6 @@ export interface ISelectTopProps {
 
 const Modal: React.FC = () => {
   const {responseFile} = useFiles();
-  console.log(responseFile);
   const exemploTop = [
     {
       nameCietific: responseFile[0]? responseFile[0].resuts[0].name: ' teste' ,

@@ -14,6 +14,7 @@ import filesize from 'filesize';
 import api from './services/api';
 import { useToast } from './hooks/toast';
 
+import Result from './components/ResultTopThree';
 export interface PreviewProps {
   src?: string;
 }
@@ -36,6 +37,7 @@ interface IData{
 export interface IResponse{
   id: string;
   resuts: [IData];
+  responseData: [];
 }
 interface IDragContexData {
   responseFile: IResponse[];
