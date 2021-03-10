@@ -25,24 +25,12 @@ import {
 
 import Carroussel from './Carroussel';
 
-const data = [
-  {
-    id: 0,
-    percentage: 87.4,
-    name: 'Pinheiro',
-    url: 'https://img.olx.com.br/images/17/179026567299551.jpg',
-    urlDB:
-      'https://cdn.pixabay.com/photo/2014/11/24/00/48/pinheiro-543393_960_720.jpg',
-  },
-  { id: 1, percentage: 12.0, name: 'Roseira', url: '', urlDB: '' },
-  { id: 2, percentage: 0.6, name: 'Pau-Brasil', url: '', urlDB: '' },
-];
-
 const ResultTopThree: React.FC = () => {
   const { responseFile, uploadedFiles } = useFiles();
   const [buttonId, setbuttonId] = useState(0); 
   const [imagePreview, setImagePreview] = useState("");
   
+  // Array responsável por armazenar os dados 
   const responseData: any[] = [];
 
   responseFile.map((itemFile, indexFile) => {
@@ -51,7 +39,8 @@ const ResultTopThree: React.FC = () => {
       indexFile,
       fileItem,
     ];
-    const temp: any[] = [];
+
+    const temp: any[] = []; // Inicializa um array vazio e temporario para juntar os dados
     itemFile.resuts.map((item, index) => {
       if( index < 3){
         temp.push(item);
@@ -64,9 +53,7 @@ const ResultTopThree: React.FC = () => {
   // Mudança do estado do button
 
   const handleFile = useCallback((valueBool: Boolean, dataFile) => {
-    console.log(buttonId, valueBool);
     if((buttonId >= 0)){
-      console.log("Entrou");
       if(valueBool){
         if(buttonId + 1 < responseFile.length)
           setbuttonId(buttonId+1);
@@ -76,6 +63,7 @@ const ResultTopThree: React.FC = () => {
         }    
         setImagePreview(dataFile[buttonId][1]);
     }else{
+      // Seta a variável buttonId para zero caso o usuário tente voltar mais do que o n° de imagens recebidas.
       setbuttonId(0);
     }
   }, [buttonId, imagePreview]);
@@ -83,10 +71,12 @@ const ResultTopThree: React.FC = () => {
   return (
     <Container>
       <div className="containerData">
+        {/* Container responsável por exibir a imagem enviada pelo usuário */}
         <ContentImage>
           <TextImage>
             <span>SUA FOTO</span>
           </TextImage>
+          {/* Carrega a imagem para o usuário através do preview recebido pela variável 'uploadedFiles' */}
           <Data className="containerPhoto" url={imagePreview}>
             <ButtonClick>
               <BsChevronLeft className="itemPhoto" onClick={() => {handleFile(false, responseData)}}/>
@@ -94,17 +84,13 @@ const ResultTopThree: React.FC = () => {
             <DataImage className="dataImagePhoto" />
           </Data>
         </ContentImage>
-        <ContentList>
-          <TextImage>
-            
-          </TextImage>
-        </ContentList>
         
+        {/* Container responsável por exibir os dados da imagem, no caso os resultados */}
         <ContentImage>
           <TextImage>
             <span>RESULTADOS</span>
           </TextImage>
-          <Data className="containerDB" url={data[0].urlDB}>
+          <Data className="containerDB" url={''}>
             <ButtonClick>
               <BsChevronRight className="itemDB" onClick={() => {handleFile(true, responseData)}} />
             </ButtonClick>
@@ -112,8 +98,10 @@ const ResultTopThree: React.FC = () => {
           </Data>
         </ContentImage>
       </div>
+
+      {/* Div responsável por indicar os detalhes e o button para exibir os detalhes */}
       <FooterData>
-        <p className="percentage">{data[0].percentage + '%'}</p>
+        <p className="percentage">{'' + '%'}</p>
         <LinearProgress
           className="barLinear"
           value={19.5}

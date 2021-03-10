@@ -5,24 +5,13 @@ import { Container, Content, BoxData, DataURL } from './styles';
 // Function(s)
 import {splitWordFull} from '../../../functions';
 
-const images = [
-  'https://source.unsplash.com/1000x800',
-  'https://source.unsplash.com/1000x802',
-  'https://source.unsplash.com/1000x804',
-];
-
-function ContainerBoxData(){
-
-  return (
-    <BoxData url={""}>
-      <span>{splitWordFull(name)}</span>
-    </BoxData>
-  )
-}
 
 const Carroussel = (props) => {
+
+  // Inicializa um array vazio para receber os dados.
   const DataReceive: any[] = [];
 
+  // Realiza o mapeamento dos dados e então manda somente os dados da imagem correspondente.
   props.data.map((item, index) => {
     if( index === props.buttonId) 
       DataReceive.push(item[2]);
@@ -39,12 +28,6 @@ const Carroussel = (props) => {
             ))
           ))
         }
-        {/* <BoxData url={images[1]}>
-          <span>Segunda Imagem</span>
-        </BoxData>
-        <BoxData url={images[2]}>
-          <span>Terceira Imagem</span>
-        </BoxData> */}
       </Content>
     </Container>
   );
