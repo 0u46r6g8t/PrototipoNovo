@@ -40,11 +40,12 @@ const Modal: React.FC = (props) => {
       })))
   })
 
-  console.log(DataModal[0])
 
-  // useEffect(()=>{
-  //   setSelectTop(DataModal[0]?DataModal[0][0]:{})
-  // },[DataModal[0]])
+  useEffect(()=>{
+    if(DataModal[0].length > 0){
+      setSelectTop(DataModal[0][0])
+    }
+  })
 
 
 

@@ -52,21 +52,37 @@ const ResultTopThree: React.FC = () => {
   
   // Mudança do estado do button
 
-  const handleFile = useCallback((valueBool: Boolean, dataFile) => {
-    if((buttonId >= 0)){
-      if(valueBool){
-        if(buttonId + 1 < responseFile.length)
-          setbuttonId(buttonId+1);
-          // setImagePreview(responseData[buttonId].fileItem);
-        }else{
-          setbuttonId(buttonId-1);
-        }    
-        setImagePreview(dataFile[buttonId][1]);
-    }else{
-      // Seta a variável buttonId para zero caso o usuário tente voltar mais do que o n° de imagens recebidas.
-      setbuttonId(0);
+  // const handleFile = useCallback((valueBool: Boolean, dataFile) => {
+  //   if((buttonId >= 0)){
+  //     if(valueBool){
+  //       if(buttonId + 1 < responseFile.length)
+  //         setbuttonId(buttonId+1);
+  //         // setImagePreview(responseData[buttonId].fileItem);
+  //       }else{
+  //         setbuttonId(buttonId-1);
+  //       }    
+  //       setImagePreview(dataFile[buttonId][1]);
+  //   }else{
+  //     // Seta a variável buttonId para zero caso o usuário tente voltar mais do que o n° de imagens recebidas.
+  //     setbuttonId(0);
+  //   }
+  // }, [buttonId, imagePreview]);
+
+  useEffect(() => {
+    if(responseData.length > 0){
+      setImagePreview(responseData[buttonId][1])
     }
-  }, [buttonId, imagePreview]);
+  })
+
+  const handleFile = useCallback((valueBool: Boolean, dataFile) => {
+    if(valueBool){
+      buttonId + 1 < dataFile.length?setbuttonId(buttonId + 1): setbuttonId(dataFile.length - 1);
+    }else{
+      buttonId - 1 >= 0? setbuttonId(buttonId - 1): setbuttonId(0);
+    }
+    console.log(dataFile)
+
+  }, [buttonId]);
   
   return (
     <Container>
