@@ -25,83 +25,83 @@ import {
 
 import Carroussel from './Carroussel';
 
-const data = [
-  {
-    id: 0,
-    percentage: 87.4,
-    name: 'Pinheiro',
-    url: 'https://img.olx.com.br/images/17/179026567299551.jpg',
-    urlDB:
-      'https://cdn.pixabay.com/photo/2014/11/24/00/48/pinheiro-543393_960_720.jpg',
-  },
-  { id: 1, percentage: 12.0, name: 'Roseira', url: '', urlDB: '' },
-  { id: 2, percentage: 0.6, name: 'Pau-Brasil', url: '', urlDB: '' },
-];
-
 const ResultTopThree: React.FC = () => {
-  const [dataActive, setDataActive] = useState<IDragDrop[]>([]);
-  const { responseFile } = useFiles();
-
-  const responseData: IResponse[] = [];
+  const { responseFile, uploadedFiles } = useFiles();
+  const [buttonId, setbuttonId] = useState(0); 
+  const [imagePreview, setImagePreview] = useState("");
   
+  // Array responsável por armazenar os dados 
+  const responseData: any[] = [];
 
   responseFile.map((itemFile, indexFile) => {
-    itemFile.resuts.map((item, index) => {
-      if( index < 3)
-        responseData.push({indexFile, item});
-    });
-  });
+    const fileItem = uploadedFiles[indexFile].preview;
+    const objectFile: any[] = [
+      indexFile,
+      fileItem,
+    ];
 
+    const temp: any[] = []; // Inicializa um array vazio e temporario para juntar os dados
+    itemFile.resuts.map((item, index) => {
+      if( index < 3){
+        temp.push(item);
+      }
+    });
+    objectFile.push(temp);
+    responseData.push(objectFile);
+  });
+  
   // Mudança do estado do button
 
-  const handleFile = useCallback((valueBool: Boolean) => {
-    if(valueBool){
-      setbuttonId(buttonId+1);
-      console.log(dataActive);
-      // setDataActive(uploadedFiles[button+1].preview);
+  const handleFile = useCallback((valueBool: Boolean, dataFile) => {
+    if((buttonId >= 0)){
+      if(valueBool){
+        if(buttonId + 1 < responseFile.length)
+          setbuttonId(buttonId+1);
+          // setImagePreview(responseData[buttonId].fileItem);
+        }else{
+          setbuttonId(buttonId-1);
+        }    
+        setImagePreview(dataFile[buttonId][1]);
     }else{
-      setbuttonId(buttonId-1);
-      // setDataActive(uploadedFiles[button+1].preview);
+      // Seta a variável buttonId para zero caso o usuário tente voltar mais do que o n° de imagens recebidas.
+      setbuttonId(0);
     }
-    
-  }, []);
-
-  const [buttonId, setbuttonId] = useState(0); 
+  }, [buttonId, imagePreview]);
   
   return (
     <Container>
       <div className="containerData">
+        {/* Container responsável por exibir a imagem enviada pelo usuário */}
         <ContentImage>
           <TextImage>
             <span>SUA FOTO</span>
           </TextImage>
-          <Data className="containerPhoto" url={dataActive}>
+          {/* Carrega a imagem para o usuário através do preview recebido pela variável 'uploadedFiles' */}
+          <Data className="containerPhoto" url={imagePreview}>
             <ButtonClick>
-              <BsChevronLeft className="itemPhoto" onClick={() => {setbuttonId(0)}}/>
+              <BsChevronLeft className="itemPhoto" onClick={() => {handleFile(false, responseData)}}/>
             </ButtonClick>
             <DataImage className="dataImagePhoto" />
           </Data>
         </ContentImage>
-        <ContentList>
-          <TextImage>
-            <h1>{data[0].name}</h1>
-          </TextImage>
-        </ContentList>
         
+        {/* Container responsável por exibir os dados da imagem, no caso os resultados */}
         <ContentImage>
           <TextImage>
-            <span>BANCO DE DADOS</span>
+            <span>RESULTADOS</span>
           </TextImage>
-          <Data className="containerDB" url={data[0].urlDB}>
+          <Data className="containerDB" url={''}>
             <ButtonClick>
-              <BsChevronRight className="itemDB" onClick={() => {handleFile(true)}} />
+              <BsChevronRight className="itemDB" onClick={() => {handleFile(true, responseData)}} />
             </ButtonClick>
             <Carroussel data={responseData} buttonId={buttonId} />
           </Data>
         </ContentImage>
       </div>
+
+      {/* Div responsável por indicar os detalhes e o button para exibir os detalhes */}
       <FooterData>
-        <p className="percentage">{data[0].percentage + '%'}</p>
+        <p className="percentage">{'' + '%'}</p>
         <LinearProgress
           className="barLinear"
           value={19.5}
