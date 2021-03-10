@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { FaFilePdf } from 'react-icons/fa';
 import {useFiles} from '../../../interfaces'
 import Exemplo1 from '../../../assets/3553.png';
 import Exemplo2 from '../../../assets/3872.png';
 import Exemplo3 from '../../../assets/032017.png';
 import {teste} from '../../../assets/class'
-import {splitWordFull, splitWordEnd} from '../../../functions';
+import {splitWordEnd, splitWordFull} from '../../../functions';
 
 import {
   Container,
@@ -18,34 +18,37 @@ import {
 } from './styles';
 
 export interface ISelectTopProps {
-  nameCietific: string ;
-  namePop: string;
-  img: string;
-  id: number;
-}
+  nameCietific: string,
+  namePop: string,
+  img: string,
+  id: Number,
+};
 
-const Modal: React.FC = () => {
+
+const Modal: React.FC = (props) => {
   const {responseFile} = useFiles();
-  const exemploTop = [
-    {
-      nameCietific: responseFile[0]? splitWordFull(responseFile[0].resuts[0].name): ' teste' ,
-      namePop:  responseFile[0]? splitWordEnd(responseFile[0].resuts[0].name): ' teste' ,
-      img: responseFile[0]? teste.find(obj => obj.img === splitWordEnd(responseFile[0].resuts[0].name)): Exemplo2,
-      id: 1,
-    },
-    {
-      nameCietific: 'cresdoceu2',
-      namePop: 'avoro2',
-      img: Exemplo2,
-      id: 2,
-    },
-    {
-      nameCietific: 'cresdoceu3',
-      namePop: 'avoro3',
-      img: Exemplo3,
-      id: 3,
-    },
-  ];
+  
+  const DataModal: [ISelectTopProps[]] = [];
+  props.data.map((item, index) => {
+    if( index === props.buttonId) 
+      // DataModal.push(item[2]);
+      DataModal.push(item[2].map((element, indexElement)=>({
+        nameCietific: splitWordFull(element.name),
+        namePop: splitWordEnd(element.name),
+        img: Exemplo2,
+        id: indexElement,
+      })))
+  })
+
+  console.log(DataModal[0])
+
+  // useEffect(()=>{
+  //   setSelectTop(DataModal[0]?DataModal[0][0]:{})
+  // },[DataModal[0]])
+
+
+
+
 
   // const [selectTop, setSelectTop] = useState<ISelectTopProps[]>([])
   const [selectTop, setSelectTop] = useState<ISelectTopProps>(
@@ -59,9 +62,10 @@ const Modal: React.FC = () => {
 
   const handleSelect = useCallback(
     id => {
-      setSelectTop(exemploTop.find(elemento => elemento.id === id));
+      // setSelectTop(DataModal[0].findIndex(indexElement => indexElement === index))
+      setSelectTop(DataModal[0].find(elemento => elemento.id === id));
     },
-    [exemploTop],
+    [DataModal[0]],
   );
 
   return (
@@ -71,21 +75,17 @@ const Modal: React.FC = () => {
         <ModalBox.Header closeButton>
           <ModalBox.Title>Detalhes</ModalBox.Title>
         </ModalBox.Header>
+        {DataModal[0] && (
+
         <ModalBox.Body>
-          {/* {selectTop.map((select)=>())} */}
+
           <TopThree idn={selectTop.id}>
-            {exemploTop.map(item => (
+            {DataModal[0].map((item) => (
               <button type="submit" onClick={() => handleSelect(item.id)}>
                 <img key={item.id} src={item.img} alt="" />
               </button>
             ))}
           </TopThree>
-
-          {/* <TopThree>
-            <img src={Exemplo1} alt="" />
-            <img src={Exemplo2} alt="" />
-            <img src={Exemplo3} alt="" />
-          </TopThree> */}
           <Info>
             <div className="names">
               <p>
@@ -103,16 +103,19 @@ const Modal: React.FC = () => {
             </div>
           </Info>
           <Grafic>
-            { !!responseFile[0] && responseFile[0].resuts.map((item)=>(
+            { !!responseFile[props.buttonId] && responseFile[props.buttonId].resuts.map((item)=>(
               <div key={splitWordEnd(item.name)}className="content">
               <p>{item.percentage}</p>
               <BarGrafic percentage={item.percentage} />
-              <p>{item.name}</p>
+              <p>{splitWordEnd(item.name)}</p>
             </div>
             ))}
             
           </Grafic>
+
         </ModalBox.Body>
+          )}
+
         {/* <ModalBox.Footer>
           <Button variant="secondary" onClick={handleColse}>
             Close

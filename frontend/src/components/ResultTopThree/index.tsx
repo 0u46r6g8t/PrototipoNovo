@@ -108,7 +108,7 @@ const ResultTopThree: React.FC = () => {
           color="secondary"
           variant="determinate"
         />
-        <Modal />
+        <Modal data={responseData} buttonId={buttonId}/>
       </FooterData>
     </Container>
   );
