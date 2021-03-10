@@ -41,20 +41,13 @@ const Modal: React.FC = (props) => {
   })
 
 
-  useEffect(()=>{
-    if(DataModal.length > 0){
-      setSelectTop(DataModal[0][0])
-    }
-  })
-
-
-
-
-
   // const [selectTop, setSelectTop] = useState<ISelectTopProps[]>([])
   const [selectTop, setSelectTop] = useState<ISelectTopProps>(
     {}
   );
+
+
+  
 
   const [show, setShow] = useState(false);
 
