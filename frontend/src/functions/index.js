@@ -10,3 +10,9 @@ export const splitWordFull = (word: string) => {
 
   return primary_name;
 }
+
+export const splitWordEnd = (word: string) => {
+  let secondary_name = word.split("_")[1];
+
+  return secondary_name;
+}

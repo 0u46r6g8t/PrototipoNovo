@@ -4,6 +4,8 @@ import {useFiles} from '../../../interfaces'
 import Exemplo1 from '../../../assets/3553.png';
 import Exemplo2 from '../../../assets/3872.png';
 import Exemplo3 from '../../../assets/032017.png';
+import {teste} from '../../../assets/class'
+import {splitWordFull, splitWordEnd} from '../../../functions';
 
 import {
   Container,
@@ -26,9 +28,9 @@ const Modal: React.FC = () => {
   const {responseFile} = useFiles();
   const exemploTop = [
     {
-      nameCietific: responseFile[0]? responseFile[0].resuts[0].name: ' teste' ,
-      namePop:  responseFile[0]? responseFile[0].resuts[0].name: ' teste' ,
-      img: Exemplo1,
+      nameCietific: responseFile[0]? splitWordFull(responseFile[0].resuts[0].name): ' teste' ,
+      namePop:  responseFile[0]? splitWordEnd(responseFile[0].resuts[0].name): ' teste' ,
+      img: responseFile[0]? teste.find(obj => obj.img === splitWordEnd(responseFile[0].resuts[0].name)): Exemplo2,
       id: 1,
     },
     {
@@ -102,7 +104,7 @@ const Modal: React.FC = () => {
           </Info>
           <Grafic>
             { !!responseFile[0] && responseFile[0].resuts.map((item)=>(
-              <div key={item.name}className="content">
+              <div key={splitWordEnd(item.name)}className="content">
               <p>{item.percentage}</p>
               <BarGrafic percentage={item.percentage} />
               <p>{item.name}</p>
