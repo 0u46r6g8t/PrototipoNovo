@@ -11,25 +11,34 @@ const images = [
   'https://source.unsplash.com/1000x804',
 ];
 
-const Carroussel = (props) => {
+function ContainerBoxData(){
 
+  return (
+    <BoxData url={""}>
+      <span>{splitWordFull(name)}</span>
+    </BoxData>
+  )
+}
+
+const Carroussel = (props) => {
   const DataReceive: any[] = [];
 
-  props.data.map(item => {
-    if (props.buttonId == item.indexFile)
-      DataReceive.push(item);
-  });
-  
-  console.log(DataReceive);
-
+  props.data.map((item, index) => {
+    if( index === props.buttonId) 
+      DataReceive.push(item[2]);
+  })
   return (
     <Container>
       <Content>
-        {DataReceive.map(item => (
-          <BoxData url={""}>
-            <span>{splitWordFull(item.item.name)}</span>
-          </BoxData>
-        ))}
+        {
+          DataReceive.map((item, index) => (
+            item.map(itemFile => (
+              <BoxData>
+                <span>{splitWordFull(itemFile.name)}</span>
+              </BoxData>
+            ))
+          ))
+        }
         {/* <BoxData url={images[1]}>
           <span>Segunda Imagem</span>
         </BoxData>

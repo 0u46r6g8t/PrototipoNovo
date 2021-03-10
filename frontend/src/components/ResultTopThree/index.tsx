@@ -39,34 +39,46 @@ const data = [
 ];
 
 const ResultTopThree: React.FC = () => {
-  const [dataActive, setDataActive] = useState<IDragDrop[]>([]);
-  const { responseFile } = useFiles();
-
-  const responseData: IResponse[] = [];
+  const { responseFile, uploadedFiles } = useFiles();
+  const [buttonId, setbuttonId] = useState(0); 
+  const [imagePreview, setImagePreview] = useState("");
   
+  const responseData: any[] = [];
 
   responseFile.map((itemFile, indexFile) => {
+    const fileItem = uploadedFiles[indexFile].preview;
+    const objectFile: any[] = [
+      indexFile,
+      fileItem,
+    ];
+    const temp: any[] = [];
     itemFile.resuts.map((item, index) => {
-      if( index < 3)
-        responseData.push({indexFile, item});
+      if( index < 3){
+        temp.push(item);
+      }
     });
+    objectFile.push(temp);
+    responseData.push(objectFile);
   });
-
+  
   // Mudança do estado do button
 
-  const handleFile = useCallback((valueBool: Boolean) => {
-    if(valueBool){
-      setbuttonId(buttonId+1);
-      console.log(dataActive);
-      // setDataActive(uploadedFiles[button+1].preview);
+  const handleFile = useCallback((valueBool: Boolean, dataFile) => {
+    console.log(buttonId, valueBool);
+    if((buttonId >= 0)){
+      console.log("Entrou");
+      if(valueBool){
+        if(buttonId + 1 < responseFile.length)
+          setbuttonId(buttonId+1);
+          // setImagePreview(responseData[buttonId].fileItem);
+        }else{
+          setbuttonId(buttonId-1);
+        }    
+        setImagePreview(dataFile[buttonId][1]);
     }else{
-      setbuttonId(buttonId-1);
-      // setDataActive(uploadedFiles[button+1].preview);
+      setbuttonId(0);
     }
-    
-  }, []);
-
-  const [buttonId, setbuttonId] = useState(0); 
+  }, [buttonId, imagePreview]);
   
   return (
     <Container>
@@ -75,26 +87,26 @@ const ResultTopThree: React.FC = () => {
           <TextImage>
             <span>SUA FOTO</span>
           </TextImage>
-          <Data className="containerPhoto" url={dataActive}>
+          <Data className="containerPhoto" url={imagePreview}>
             <ButtonClick>
-              <BsChevronLeft className="itemPhoto" onClick={() => {setbuttonId(0)}}/>
+              <BsChevronLeft className="itemPhoto" onClick={() => {handleFile(false, responseData)}}/>
             </ButtonClick>
             <DataImage className="dataImagePhoto" />
           </Data>
         </ContentImage>
         <ContentList>
           <TextImage>
-            <h1>{data[0].name}</h1>
+            
           </TextImage>
         </ContentList>
         
         <ContentImage>
           <TextImage>
-            <span>BANCO DE DADOS</span>
+            <span>RESULTADOS</span>
           </TextImage>
           <Data className="containerDB" url={data[0].urlDB}>
             <ButtonClick>
-              <BsChevronRight className="itemDB" onClick={() => {handleFile(true)}} />
+              <BsChevronRight className="itemDB" onClick={() => {handleFile(true, responseData)}} />
             </ButtonClick>
             <Carroussel data={responseData} buttonId={buttonId} />
           </Data>
