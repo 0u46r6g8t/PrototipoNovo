@@ -65,10 +65,6 @@ const DragDrop: React.FC = () => {
         {renderDragMessage()}
       </DropContainer>
 
-      <ButtonAllSend>
-        <TextButton>Classificar Todos</TextButton>
-      </ButtonAllSend>
-
       <ButtonDelAll>
         <TextButton>Deletar Todos</TextButton>
       </ButtonDelAll>

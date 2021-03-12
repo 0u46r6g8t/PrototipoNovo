@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
-  height: 900px;
+  height: 800px;
 `;
 
 export const DropContainer = styled.div`
   width: 236px;
   height: 220px;
-  margin-top: 200px;
+  margin-top: 110px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 16px;
@@ -52,23 +52,10 @@ export const ButtonDelAll = styled.a.attrs({
   height: 69px;
   border-radius: 8px;
   background: #eb5757;
-  margin-top: 150px;
+  margin-top: 40px;
   position: absolute;
   left: 75px;
   width: 293px;
-  padding: 5px;
-`;
-
-export const ButtonAllSend = styled.a.attrs({
-  href: '#',
-})`
-  left: 75px;
-  margin-top: 50px;
-  position: absolute;
-  width: 293px;
-  background: #27ae60;
-  border-radius: 8px;
-  height: 69px;
   padding: 5px;
 `;
 
@@ -83,7 +70,8 @@ export const TextButton = styled.p`
 `;
 
 export const ContainerFile = styled.div`
-  margin-top: 250px;
   height: 150px;
   overflow-y: auto;
+  width: 80%;
+  margin: 150px auto;
 `;

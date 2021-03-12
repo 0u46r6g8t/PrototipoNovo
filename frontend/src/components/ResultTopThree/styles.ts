@@ -16,13 +16,14 @@ export const Container = styled.div`
   .containerData {
     display: flex;
     width: 100%;
-    height: 80%;
+    height: 65%;
   }
 `;
 
 export const ContentImage = styled.div`
-  height: 100%;
-  width: 38%;
+  height: 90%;
+  width: 45%;
+  padding: 2%;
 
   .containerDB {
     display: flex;
@@ -43,7 +44,7 @@ export const ContentImage = styled.div`
 
 export const ContentList = styled.div`
   height: 90%;
-  margin-top: 10%;
+  margin-top: 10px;
   width: 16%;
 `;
 
@@ -51,12 +52,16 @@ interface IData {
   url: string;
 }
 
+export const imagePreview = styled.div`
+  height: 100%;
+`;
+
 // Componentes internos do ContentImage
 export const Data = styled.div<IData>`
   display: flex;
   width: 100%;
   height: 80%;
-  margin-top: 80px;
+  margin-top: 70px;
 
   .dataImageDB {
     background-image: url(${props => props.urlDB});
@@ -68,6 +73,7 @@ export const Data = styled.div<IData>`
   .dataImagePhoto {
     background-image: url(${props => props.url});
     background-size: 100%;
+    margin-top: 22%;
     border-radius: 5px;
     background-repeat: no-repeat;
   }
@@ -76,12 +82,6 @@ export const Data = styled.div<IData>`
 // Div responsável por inserir os buttons das três principais espécies
 export const DataImage = styled.div`
   width: 90%;
-`;
-
-export const DataTop = styled.div`
-  width: 100%;
-  height: 74.2%;
-  padding: 45px;
 `;
 
 export const DataNumber = styled.div`
@@ -112,7 +112,7 @@ export const DataNumber = styled.div`
 
 // Div responsável pelos titulos da página
 export const TextImage = styled.div`
-  height: 12%;
+  height: 5%;
   width: 90%;
 
   span,
@@ -138,7 +138,7 @@ export const TextImage = styled.div`
 
 // Div Responsável por mostrar a porcentagem e a barra de progresso
 export const FooterData = styled.div`
-  width: 100%;
+  width: 90%;
   height: 10%;
 
   .percentage {

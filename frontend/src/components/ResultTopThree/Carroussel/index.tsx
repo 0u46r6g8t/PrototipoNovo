@@ -5,7 +5,6 @@ import { Container, Content, BoxData, DataURL } from './styles';
 // Function(s)
 import {splitWordFull} from '../../../functions';
 
-
 const Carroussel = (props) => {
 
   // Inicializa um array vazio para receber os dados.
@@ -21,9 +20,9 @@ const Carroussel = (props) => {
       <Content>
         {
           DataReceive.map((item, index) => (
-            item.map(itemFile => (
+            item.map((itemFile, indexFile) => (
               <BoxData>
-                <span>{splitWordFull(itemFile.name)}</span>
+                <span>{indexFile + 1 + '°'} - {splitWordFull(itemFile.name)}</span>
               </BoxData>
             ))
           ))

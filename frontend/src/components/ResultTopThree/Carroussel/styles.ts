@@ -8,7 +8,7 @@ export const BoxData = styled.div<ICarroussel>`
   overflow: hidden;
   transition: 0.5s;
   height: 109px;
-  margin: 0 2%;
+  margin: 0 7%;
   width: 95%;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
   background-size: 390px;
@@ -21,7 +21,7 @@ export const BoxData = styled.div<ICarroussel>`
     font-family: Raleway;
     font-style: normal;
     font-weight: 500;
-    font-size: 18.43px;
+    font-size: 20.43px;
     margin-left: 10px;
     line-height: 33px;
     color: #FFFFFF;

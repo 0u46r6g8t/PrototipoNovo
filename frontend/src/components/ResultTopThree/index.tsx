@@ -13,7 +13,7 @@ import { useFiles, IDragDrop, IResponse } from '../../interfaces';
 import {
   Container,
   ContentImage,
-  ContentList,
+  imagePreview,
   Data,
   DataImage,
   TextImage,
@@ -29,7 +29,8 @@ const ResultTopThree: React.FC = () => {
   const { responseFile, uploadedFiles } = useFiles();
   const [buttonId, setbuttonId] = useState(0); 
   const [imagePreview, setImagePreview] = useState("");
-  
+  const [percentage, setPercentage] = useState("");
+
   // Array responsável por armazenar os dados 
   const responseData: any[] = [];
 
@@ -39,49 +40,35 @@ const ResultTopThree: React.FC = () => {
       indexFile,
       fileItem,
     ];
-
     const temp: any[] = []; // Inicializa um array vazio e temporario para juntar os dados
+    let maior = 0;
     itemFile.resuts.map((item, index) => {
       if( index < 3){
         temp.push(item);
+        item.percentage >= maior ? maior = item.percentage : '';
       }
     });
     objectFile.push(temp);
+    objectFile.push(maior);
     responseData.push(objectFile);
   });
-  
-  // Mudança do estado do button
-
-  // const handleFile = useCallback((valueBool: Boolean, dataFile) => {
-  //   if((buttonId >= 0)){
-  //     if(valueBool){
-  //       if(buttonId + 1 < responseFile.length)
-  //         setbuttonId(buttonId+1);
-  //         // setImagePreview(responseData[buttonId].fileItem);
-  //       }else{
-  //         setbuttonId(buttonId-1);
-  //       }    
-  //       setImagePreview(dataFile[buttonId][1]);
-  //   }else{
-  //     // Seta a variável buttonId para zero caso o usuário tente voltar mais do que o n° de imagens recebidas.
-  //     setbuttonId(0);
-  //   }
-  // }, [buttonId, imagePreview]);
 
   useEffect(() => {
     if(responseData.length > 0){
-      setImagePreview(responseData[buttonId][1])
+      setImagePreview(responseData[buttonId][1]);
+      setPercentage(responseData[buttonId][3]);
     }
   })
+
+  // Realiza as operações para mudança de imagens, no caso o estado de cada imagem.
 
   const handleFile = useCallback((valueBool: Boolean, dataFile) => {
     if(valueBool){
       buttonId + 1 < dataFile.length?setbuttonId(buttonId + 1): setbuttonId(dataFile.length - 1);
+      
     }else{
       buttonId - 1 >= 0? setbuttonId(buttonId - 1): setbuttonId(0);
     }
-    console.log(dataFile)
-
   }, [buttonId]);
   
   return (
@@ -117,10 +104,10 @@ const ResultTopThree: React.FC = () => {
 
       {/* Div responsável por indicar os detalhes e o button para exibir os detalhes */}
       <FooterData>
-        <p className="percentage">{'' + '%'}</p>
+        <p className="percentage">{percentage != '' ? percentage + '%' : '0%' }</p>
         <LinearProgress
           className="barLinear"
-          value={19.5}
+          value={percentage != '' ? percentage : 0 }
           color="secondary"
           variant="determinate"
         />

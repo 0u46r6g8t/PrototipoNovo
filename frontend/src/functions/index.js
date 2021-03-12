@@ -1,8 +1,12 @@
-export const splitWord = (word: string) => {
+  export const splitWord = (word: string) => {
   let ext = '', name = '';
-  ext = word.split('.')[1]
-  name = word.substring(0, 5);
-  return name.concat('.', ext);
+  ext = word.split('.')[1];
+  name = word.substring(0, 7);
+  if ( ext == word.match('jpg', 'png', 'jpeg') ){
+    return name.concat('...', ext);
+  }else{
+    return name.concat('... '); 
+  }
 }
 
 export const splitWordFull = (word: string) => {
