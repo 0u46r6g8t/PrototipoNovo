@@ -7,7 +7,6 @@ import werkzeug
 import numpy as np
 import cv2
 
-
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 api = Api(app)
@@ -33,7 +32,7 @@ class teste(Resource):
     # cv2.imwrite('teste.jpg', cvimg)
     # print(cvimg[0:3,0:3,:])
     ret = fm.proc_res(MODEL.predict(fm.generator(cvimg)))
-    print(ret)
+
     return ret
 
 class classifica(Resource):
