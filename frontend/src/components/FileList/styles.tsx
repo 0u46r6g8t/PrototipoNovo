@@ -60,3 +60,23 @@ export const Preview = styled.div<PreviewProps>`
   background-position: 50% 50%;
   margin-right: 10px;
 `;
+export const ButtonDelAll = styled.a.attrs({
+  href: '#',
+})`
+  height: 69px;
+  border-radius: 8px;
+  background: #eb5757;
+  position: absolute;
+  top: 576px;
+    width: 293px;
+`;
+
+export const TextButton = styled.p`
+  text-align: center;
+  margin: auto;
+  width: 232px;
+  height: 33px;
+  font-size: 29.83px;
+  margin-top: 16px;
+  cursor: pointer;
+`;

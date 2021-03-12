@@ -15,14 +15,11 @@ import {
   Container,
   ContainerFile,
   UploadMessage,
-  ButtonAllSend,
-  ButtonDelAll,
-  TextButton,
 } from './style';
 
 // Functions
 const DragDrop: React.FC = () => {
-  const { fileUploaded } = useFiles();
+  const { fileUploaded, deleteFile } = useFiles();
 
   const onDrop = useCallback(
     items => {
@@ -65,13 +62,12 @@ const DragDrop: React.FC = () => {
         {renderDragMessage()}
       </DropContainer>
 
-      <ButtonDelAll>
-        <TextButton>Deletar Todos</TextButton>
-      </ButtonDelAll>
+      
 
       <ContainerFile>
         <FileList />
       </ContainerFile>
+      
     </Container>
   );
 };

@@ -61,7 +61,7 @@ export const Data = styled.div<IData>`
   display: flex;
   width: 100%;
   height: 80%;
-  margin-top: 70px;
+  margin-top: 40px;
 
   .dataImageDB {
     background-image: url(${props => props.urlDB});
@@ -73,7 +73,6 @@ export const Data = styled.div<IData>`
   .dataImagePhoto {
     background-image: url(${props => props.url});
     background-size: 100%;
-    margin-top: 22%;
     border-radius: 5px;
     background-repeat: no-repeat;
   }
@@ -126,7 +125,7 @@ export const TextImage = styled.div`
   span {
     width: 303px;
     height: 11%;
-    padding-top: 35px;
+    /* padding-top: 35px; */
   }
 
   h1 {

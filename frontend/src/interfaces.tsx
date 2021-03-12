@@ -60,10 +60,7 @@ const FileProvider: React.FC = ({ children }) => {
   const [uploadedFiles, setUploadedFiles] = useState<IDragDrop[]>([]);
   const [responseFile, setResponseFile] = useState<IResponse[]>([]);
 
-  const uploadFiles = useCallback(item => {
-    return 'Ola mundo';
-  }, []);
-
+ 
   useEffect(() => {
     return () => {
       uploadedFiles.forEach(file => URL.revokeObjectURL(file.Preview));
@@ -101,7 +98,7 @@ const FileProvider: React.FC = ({ children }) => {
           }));
 
           const result:IResponse = {
-            id: uniqueId(),
+            id: uploadedFile.id,
             resuts: outCome,
           };
 
@@ -147,8 +144,15 @@ const FileProvider: React.FC = ({ children }) => {
   // Function Delete data
 
   const deleteFile = useCallback((id: string) => {
+    if(id === '-1'){
+      setUploadedFiles([]);
+      setResponseFile([]);
+    }else{
     setUploadedFiles(state => state.filter(file => file.id !== id));
+    setResponseFile(state => state.filter(response => response.id !==id));
+    }
   }, []);
+
 
   return (
     <FileContext.Provider value={{ uploadedFiles, fileUploaded, deleteFile, responseFile }}>

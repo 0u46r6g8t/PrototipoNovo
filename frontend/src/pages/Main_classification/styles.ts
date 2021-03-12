@@ -8,16 +8,15 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
-  position: relative;
-  height: 820px;
-  width: 100%;
-  top: 35px;
+  justify-content: center;
+  
 `;
 
 export const ContentDrop = styled.div`
   display: flex;
   height: 100%;
   width: 450px;
+  margin-top: 20px;
 `;
 
 export const ResultTopThree = styled.div`

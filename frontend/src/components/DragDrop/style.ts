@@ -3,15 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
-  height: 800px;
+  /* height: 800px; */
+
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const DropContainer = styled.div`
   width: 236px;
   height: 220px;
-  margin-top: 110px;
-  margin-left: auto;
-  margin-right: auto;
+ 
   border-radius: 16px;
   background: #7c943d;
 
@@ -46,32 +49,12 @@ export const UploadMessage = styled.div<ITypeMessageColor>`
   cursor: pointer;
 `;
 
-export const ButtonDelAll = styled.a.attrs({
-  href: '#',
-})`
-  height: 69px;
-  border-radius: 8px;
-  background: #eb5757;
-  margin-top: 40px;
-  position: absolute;
-  left: 75px;
-  width: 293px;
-  padding: 5px;
-`;
 
-export const TextButton = styled.p`
-  text-align: center;
-  margin: auto;
-  width: 232px;
-  height: 33px;
-  font-size: 29.83px;
-  margin-top: 16px;
-  cursor: pointer;
-`;
 
 export const ContainerFile = styled.div`
-  height: 150px;
+  height: 200px;
   overflow-y: auto;
   width: 80%;
-  margin: 150px auto;
 `;
+
+

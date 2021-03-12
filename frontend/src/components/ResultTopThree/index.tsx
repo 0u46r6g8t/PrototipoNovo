@@ -54,11 +54,17 @@ const ResultTopThree: React.FC = () => {
   });
 
   useEffect(() => {
+    setImagePreview("");
+    setPercentage("");
     if(responseData.length > 0){
       setImagePreview(responseData[buttonId][1]);
       setPercentage(responseData[buttonId][3]);
     }
+      
   })
+
+  
+
 
   // Realiza as operações para mudança de imagens, no caso o estado de cada imagem.
 

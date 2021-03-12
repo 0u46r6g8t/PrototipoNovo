@@ -5,7 +5,7 @@ import { useFiles, IDragDrop } from '../../interfaces';
 import { splitWord } from '../../functions/';
 
 // Styles
-import { Container, FileInfo, Preview } from './styles';
+import { Container, FileInfo, Preview, ButtonDelAll, TextButton } from './styles';
 
 const FileList = () => {
   const { uploadedFiles: files, deleteFile } = useFiles();
@@ -45,6 +45,10 @@ const FileList = () => {
           </div>
         </li>
       ))}
+
+      <ButtonDelAll>
+        <TextButton onClick={() =>{deleteFile('-1')}}>Deletar Todos</TextButton>
+      </ButtonDelAll>
     </Container>
   );
 };
