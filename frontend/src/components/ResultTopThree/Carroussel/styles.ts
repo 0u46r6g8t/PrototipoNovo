@@ -9,7 +9,7 @@ export const BoxData = styled.div<ICarroussel>`
   transition: 0.5s;
   height: 109px;
   margin: 0 7%;
-  width: 95%;
+  width: 85%;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
   background-size: 390px;
   background-position: center;
@@ -21,7 +21,7 @@ export const BoxData = styled.div<ICarroussel>`
     font-family: Raleway;
     font-style: normal;
     font-weight: 500;
-    font-size: 20.43px;
+    font-size: 13.43px;
     margin-left: 10px;
     line-height: 33px;
     color: #FFFFFF;

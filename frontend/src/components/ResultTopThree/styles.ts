@@ -73,6 +73,7 @@ export const Data = styled.div<IData>`
   .dataImagePhoto {
     background-image: url(${props => props.url});
     background-size: 100%;
+    margin-top: 40px;
     border-radius: 5px;
     background-repeat: no-repeat;
   }
@@ -139,6 +140,7 @@ export const TextImage = styled.div`
 export const FooterData = styled.div`
   width: 90%;
   height: 10%;
+  margin-top: 65px;
 
   .percentage {
     font-size: 25px;
