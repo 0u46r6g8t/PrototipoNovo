@@ -4,22 +4,21 @@ import styled from 'styled-components';
 import { PreviewProps } from '../../interfaces';
 
 export const Container = styled.div`
-  width: 80%;
+  width: 82%;
   align-items: center;
-  margin: 20px auto;
+  margin: 0px auto;
   border-radius: 8px;
-  padding: 5px;
   background-color: rgba(0.1, 0, 0, 0.2);
 
   li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 1px;
     color: #444;
 
     & + li {
-      margin-top: 5px;
+      margin-top: 20px;
     }
   }
 `;
