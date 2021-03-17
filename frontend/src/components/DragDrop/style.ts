@@ -49,12 +49,11 @@ export const UploadMessage = styled.div<ITypeMessageColor>`
   cursor: pointer;
 `;
 
-
-
 export const ContainerFile = styled.div`
-  height: 200px;
+  height: 180px;
+  margin-top: 20px;
   overflow-y: auto;
-  width: 80%;
+  width: 85%;
 `;
 
 

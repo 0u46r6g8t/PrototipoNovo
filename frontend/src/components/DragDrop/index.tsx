@@ -62,8 +62,6 @@ const DragDrop: React.FC = () => {
         {renderDragMessage()}
       </DropContainer>
 
-      
-
       <ContainerFile>
         <FileList />
       </ContainerFile>
