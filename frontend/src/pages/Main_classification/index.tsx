@@ -8,7 +8,11 @@ import NavBar from '../../components/NavBar';
 import ResultTop from '../../components/ResultTopThree';
 import { FileProvider } from '../../interfaces';
 
+// File Reader
+import {listenImages} from '../../functions';
+
 const MainClassification: React.FC = () => {
+  listenImages();
   return (
     <FileProvider>
       <Container>
