@@ -1,4 +1,21 @@
+import path from 'path';
 import fs from 'fs';
+
+// Functions 
+
+function readdir(path){
+  return new Promise((resolve, reject) => {
+    fs.readdir(path, (err, paths) =>{
+      if(err){
+          reject(err)
+      } else {
+          resolve(paths)
+      }
+    })
+  })
+}
+
+// ---------
 
 export const splitWord = (word: string) => {
   let ext = '', name = '';
@@ -25,9 +42,14 @@ export const splitWordEnd = (word: string) => {
   return secondary_name;
 }
 
-export const listenImages =  () => {
+// Verificar erros na função, pois estou tentando importar o module fs só que o mesmo não é reconhecido como um modulo.
 
-  console.log(fs);
+export const listenImages =  () => {
+  const photoImage = path.resolve(__dirname, '..', 'assets', 'imagens_clb'); 
+  
+  const handlePhoto = readdir(photoImage);
+
+  console.log(handlePhoto);
 
   // fs.readFileSync('../../assets/imagens_clb', 'utf-8', (err, file) => {
   //   if(err) throw err;

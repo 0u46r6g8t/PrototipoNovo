@@ -53,6 +53,9 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.7",
     "@types/uuid": "^8.3.0",
+    "FileReader": "^0.10.2",
+    "fs": "^0.0.1-security",
+    "react-file-reader": "^1.1.4",
     "react-progressbar": "^15.4.1"
   }
 }
