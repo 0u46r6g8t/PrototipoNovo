@@ -1,21 +1,6 @@
 import path from 'path';
-import fs from 'fs';
 
-// Functions 
-
-function readdir(path){
-  return new Promise((resolve, reject) => {
-    fs.readdir(path, (err, paths) =>{
-      if(err){
-          reject(err)
-      } else {
-          resolve(paths)
-      }
-    })
-  })
-}
-
-// ---------
+const pathFiles = '..' + __dirname+ '..'+ __dirname+ '..'+ __dirname+ 'assets'+ __dirname+ 'imagens_clb' + __dirname;
 
 export const splitWord = (word: string) => {
   let ext = '', name = '';
@@ -30,9 +15,7 @@ export const splitWord = (word: string) => {
 
 export const splitWordFull = (word: string) => {
   let primary_name = word.split("_")[0];
-
   primary_name = primary_name.split(" ")[0].concat(" ", primary_name.split(" ")[1]);
-
   return primary_name;
 }
 
@@ -42,23 +25,11 @@ export const splitWordEnd = (word: string) => {
   return secondary_name;
 }
 
-// Verificar erros na função, pois estou tentando importar o module fs só que o mesmo não é reconhecido como um modulo.
+export const concatPathImagem = (word: string) => {
+  word = word.replaceAll(' ', '%20');
 
-export const listenImages =  () => {
-  const photoImage = path.resolve(__dirname, '..', 'assets', 'imagens_clb'); 
-  
-  const handlePhoto = readdir(photoImage);
+  var pathF = 'https://raw.githubusercontent.com/L3onT3chh/ImagensClb/master/' + word + '.jpg';
+  console.log(word);
+  return pathF;
 
-  console.log(handlePhoto);
-
-  // fs.readFileSync('../../assets/imagens_clb', 'utf-8', (err, file) => {
-  //   if(err) throw err;
-  //   console.log(file);
-  // })
-
-  // readdir('../assets/image_clb', function(error, file){
-  //   if(error)
-  //     throw Error(error);
-  //   console.log(file);
-  // });
 }

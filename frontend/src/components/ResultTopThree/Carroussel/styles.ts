@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled from 'styled-components'; 
 
 // Interfaces
 import { ICarroussel } from '../../../interfaces';
 
-export const BoxData = styled.div<ICarroussel>`
+export const BoxData = styled.div.attrs({
+  className: 'boxdata',
+})<ICarroussel>`
   flex: 1;
   overflow: hidden;
   transition: 0.5s;

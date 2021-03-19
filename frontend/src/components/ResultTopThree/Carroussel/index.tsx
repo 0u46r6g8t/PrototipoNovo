@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Container, Content, BoxData, DataURL } from './styles';
 
 // Function(s)
-import {splitWordFull} from '../../../functions';
+import {splitWordFull, concatPathImagem} from '../../../functions';
 
 const Carroussel = (props) => {
 
@@ -17,15 +17,15 @@ const Carroussel = (props) => {
       DataReceive.push(item[2]);
       nameImage.push(item[2]);
     }
-  })
-  console.log(nameImage);
+  });
+
   return (
     <Container>
       <Content>
         {
           DataReceive.map((item) => (
             item.map((itemFile, indexFile) => (
-              <BoxData>
+              <BoxData url={concatPathImagem(itemFile.name)}>
                 <span>{indexFile + 1 + '°'} - {splitWordFull(itemFile.name)}</span>
               </BoxData>
             ))
