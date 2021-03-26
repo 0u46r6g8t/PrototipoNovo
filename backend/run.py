@@ -6,6 +6,7 @@ import funmodel as fm
 import werkzeug
 import numpy as np
 import cv2
+import os
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -29,20 +30,11 @@ class teste(Resource):
     
     npimg = np.fromstring(img, np.uint8)
     cvimg = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-    # cv2.imwrite('teste.jpg', cvimg)
-    # print(cvimg[0:3,0:3,:])
+
     ret = fm.proc_res(MODEL.predict(fm.generator(cvimg)))
-
     return ret
-
-class classifica(Resource):
-  def post(self):
-    # path_img = 
-    # retorno = fm.proc_res(MODEL.predict(fm.generator(path_img)))
-    pass
-
 
 api.add_resource(teste, '/teste')
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(host='0.0.0.0')
